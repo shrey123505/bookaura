@@ -1,12 +1,16 @@
 # BookAura
 
-BookAura is a premium online storefront for curated books, productivity tools, creative desk products, and everyday upgrades. It is built with Next.js, React, Tailwind CSS, Framer Motion, and Lucide React.
+**Live Demo:** https://bookaura-beta.vercel.app/
+
+BookAura is a premium full-stack online storefront for curated books, productivity tools, creative desk products, and everyday upgrades. It is built with Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Lucide React, and Supabase.
+
+The project includes a polished storefront, Supabase-powered products, demo checkout orders, contact form storage, and a protected admin panel for managing products, orders, and customer messages.
 
 ## Features
 
 - Modern responsive landing page with hero, CTAs, featured products, benefits, testimonials, and newsletter block
 - Product listing page with search, category filters, product cards, pricing, ratings, and quick add-to-cart actions
-- Product detail pages generated from local dummy product data
+- Product detail pages powered by Supabase-first product queries with local fallback data
 - Supabase-ready product backend with local fallback data for development
 - Cart page with localStorage persistence, demo order checkout, quantity controls, totals, remove item, and clear cart actions
 - About page with brand story, mission, and differentiation
@@ -121,3 +125,6 @@ Add the environment variables above in Vercel Project Settings before deploying 
 - Add Stripe or Razorpay checkout
 - Add order confirmation emails
 - Add admin product management
+
+## Security Note:
+Never commit `.env.local` or secret keys. `SUPABASE_SERVICE_ROLE_KEY` is server-only and must not be exposed in client components.
