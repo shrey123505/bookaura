@@ -7,9 +7,11 @@ BookAura is a premium online storefront for curated books, productivity tools, c
 - Modern responsive landing page with hero, CTAs, featured products, benefits, testimonials, and newsletter block
 - Product listing page with search, category filters, product cards, pricing, ratings, and quick add-to-cart actions
 - Product detail pages generated from local dummy product data
-- Cart page with localStorage persistence, quantity controls, totals, remove item, and clear cart actions
+- Supabase-ready product backend with local fallback data for development
+- Cart page with localStorage persistence, demo order checkout, quantity controls, totals, remove item, and clear cart actions
 - About page with brand story, mission, and differentiation
-- Contact page with accessible form fields and contact/social links
+- Contact page with accessible form fields saved to Supabase
+- Protected admin panel for products, orders, and contact messages
 - Mobile navbar, smooth animations, focus states, and optimized Next.js images
 
 ## Tech Stack
@@ -20,7 +22,30 @@ BookAura is a premium online storefront for curated books, productivity tools, c
 - Tailwind CSS
 - Framer Motion
 - Lucide React
-- Local dummy data and localStorage cart state
+- Supabase
+- Local fallback data and localStorage cart state
+
+## Environment Variables
+
+Create `.env.local` from `.env.example`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+ADMIN_EMAILS=
+```
+
+`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are safe for browser use. `SUPABASE_SERVICE_ROLE_KEY` is server-only and must never be exposed in frontend code. `ADMIN_EMAILS` is a comma-separated allowlist for admin access.
+
+## Supabase Setup
+
+1. Create a Supabase project.
+2. Open the SQL editor.
+3. Run `supabase/schema.sql`.
+4. Run `supabase/seed.sql`.
+5. Create an Auth user for your admin email.
+6. Add that email to `ADMIN_EMAILS` or insert it into `admin_users`.
 
 ## Getting Started
 
@@ -58,16 +83,23 @@ app/
   cart/
   about/
   contact/
+  admin/
+  api/
 components/
   navbar.tsx
   footer.tsx
   product-card.tsx
+  admin/
   button.tsx
   motion-wrapper.tsx
 lib/
   products.ts
   cart-context.tsx
+  supabase/
   utils.ts
+supabase/
+  schema.sql
+  seed.sql
 ```
 
 ## Deploying To Vercel
@@ -80,7 +112,7 @@ lib/
 6. Use the default output settings.
 7. Click Deploy.
 
-No environment variables are required for the current dummy-data version.
+Add the environment variables above in Vercel Project Settings before deploying the Supabase-backed version.
 
 ## Future Improvements
 

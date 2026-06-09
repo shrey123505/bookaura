@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { ContactForm } from "@/components/contact-form";
 import { MotionWrapper } from "@/components/motion-wrapper";
 
 const contactItems = [
@@ -52,62 +53,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <form className="glass-panel rounded-[2rem] p-6 sm:p-8">
-            <div className="grid gap-5 sm:grid-cols-2">
-              <label className="grid gap-2 text-sm font-bold text-slate-700">
-                First name
-                <input
-                  name="firstName"
-                  autoComplete="given-name"
-                  className="min-h-12 rounded-2xl border border-slate-200 bg-white px-4 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
-                />
-              </label>
-              <label className="grid gap-2 text-sm font-bold text-slate-700">
-                Last name
-                <input
-                  name="lastName"
-                  autoComplete="family-name"
-                  className="min-h-12 rounded-2xl border border-slate-200 bg-white px-4 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
-                />
-              </label>
-              <label className="grid gap-2 text-sm font-bold text-slate-700 sm:col-span-2">
-                Email
-                <input
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  className="min-h-12 rounded-2xl border border-slate-200 bg-white px-4 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
-                />
-              </label>
-              <label className="grid gap-2 text-sm font-bold text-slate-700 sm:col-span-2">
-                What can we help with?
-                <select
-                  name="topic"
-                  className="min-h-12 rounded-2xl border border-slate-200 bg-white px-4 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
-                >
-                  <option>Product recommendation</option>
-                  <option>Order support</option>
-                  <option>Bulk or gift order</option>
-                  <option>Partnership inquiry</option>
-                </select>
-              </label>
-              <label className="grid gap-2 text-sm font-bold text-slate-700 sm:col-span-2">
-                Message
-                <textarea
-                  name="message"
-                  rows={6}
-                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
-                  placeholder="Share your goal, budget, or the kind of books and products you enjoy."
-                />
-              </label>
-            </div>
-            <button
-              type="button"
-              className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-ocean px-6 text-sm font-black text-white shadow-lg shadow-blue-600/25 transition hover:-translate-y-0.5 hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean sm:w-auto"
-            >
-              Send message
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </section>
     </MotionWrapper>

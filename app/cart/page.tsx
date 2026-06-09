@@ -1,14 +1,30 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { CheckCircle2, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { CheckoutButton } from "@/components/checkout-button";
 import { MotionWrapper } from "@/components/motion-wrapper";
 import { useCart } from "@/lib/cart-context";
 import { formatCurrency } from "@/lib/utils";
 
 export default function CartPage() {
   const { clearCart, isLoaded, items, removeItem, totalPrice, updateQuantity } = useCart();
+  const [orderConfirmation, setOrderConfirmation] = useState<{
+    orderId: string;
+    itemCount: number;
+    total: number;
+  } | null>(null);
+
+  const handleCheckoutSuccess = (orderId: string) => {
+    setOrderConfirmation({
+      orderId,
+      itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
+      total: totalPrice
+    });
+    clearCart();
+  };
 
   return (
     <MotionWrapper>
@@ -23,6 +39,26 @@ export default function CartPage() {
               Review your picks, adjust quantities, and continue to checkout when everything feels right.
             </p>
           </div>
+
+          {orderConfirmation && (
+            <div className="mt-10 rounded-[1.5rem] border border-blue-100 bg-white p-6 shadow-sm">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-mist text-ocean">
+                  <CheckCircle2 className="h-6 w-6" />
+                </span>
+                <div>
+                  <h2 className="text-2xl font-black text-ink">Order placed successfully!</h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    Your demo order has been saved to Supabase. Order ID:{" "}
+                    <span className="font-bold text-ink">{orderConfirmation.orderId}</span>
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-slate-700">
+                    {orderConfirmation.itemCount} item{orderConfirmation.itemCount === 1 ? "" : "s"} · {formatCurrency(orderConfirmation.total)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {!isLoaded ? (
             <div className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-10 text-center shadow-sm">
@@ -127,12 +163,7 @@ export default function CartPage() {
                   <span>Total</span>
                   <span>{formatCurrency(totalPrice)}</span>
                 </div>
-                <button
-                  type="button"
-                  className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-white px-6 text-sm font-black text-ink transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-200"
-                >
-                  Checkout
-                </button>
+                <CheckoutButton items={items} onSuccess={handleCheckoutSuccess} />
                 <button
                   type="button"
                   onClick={clearCart}

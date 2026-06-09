@@ -4,7 +4,7 @@ import { Button } from "@/components/button";
 import { MotionWrapper } from "@/components/motion-wrapper";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
-import { products } from "@/lib/products";
+import { getFeaturedProducts, getProducts } from "@/lib/supabase/queries";
 
 const benefits = [
   {
@@ -45,7 +45,13 @@ const testimonials = [
   }
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [products, featuredProducts] = await Promise.all([
+    getProducts(),
+    getFeaturedProducts(3)
+  ]);
+  const heroProducts = products.length >= 3 ? products : featuredProducts;
+
   return (
     <MotionWrapper>
       <section className="relative overflow-hidden px-4 pb-16 pt-12 sm:px-6 lg:px-8">
@@ -86,7 +92,7 @@ export default function HomePage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="relative min-h-80 overflow-hidden rounded-[1.5rem]">
                 <Image
-                  src={products[0].image}
+                  src={heroProducts[0]?.image || featuredProducts[0]?.image}
                   alt="Featured BookAura book"
                   fill
                   priority
@@ -104,7 +110,7 @@ export default function HomePage() {
                 </div>
                 <div className="relative min-h-52 overflow-hidden rounded-[1.5rem]">
                   <Image
-                    src={products[2].image}
+                    src={heroProducts[2]?.image || heroProducts[0]?.image || featuredProducts[0]?.image}
                     alt="BookAura desk essentials"
                     fill
                     sizes="(min-width: 1024px) 25vw, 80vw"
@@ -131,7 +137,7 @@ export default function HomePage() {
             </Button>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {products.slice(0, 3).map((product) => (
+            {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

@@ -5,11 +5,15 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { MotionWrapper } from "@/components/motion-wrapper";
 import { ProductCard } from "@/components/product-card";
-import { categories, products } from "@/lib/products";
+import { Product } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
-export function ProductsClient() {
+export function ProductsClient({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(products.map((product) => product.category)))],
+    [products]
+  );
   const requestedCategory = searchParams.get("category") || "All";
   const initialCategory = categories.includes(requestedCategory) ? requestedCategory : "All";
   const [query, setQuery] = useState("");
@@ -17,7 +21,7 @@ export function ProductsClient() {
 
   useEffect(() => {
     setCategory(categories.includes(requestedCategory) ? requestedCategory : "All");
-  }, [requestedCategory]);
+  }, [categories, requestedCategory]);
 
   const filteredProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -35,7 +39,7 @@ export function ProductsClient() {
       const matchesCategory = category === "All" || product.category === category;
       return matchesSearch && matchesCategory;
     });
-  }, [category, query]);
+  }, [category, products, query]);
 
   return (
     <MotionWrapper>

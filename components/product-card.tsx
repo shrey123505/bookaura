@@ -17,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
       className="group overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm transition hover:shadow-premium"
     >
-      <Link href={`/products/${product.id}`} className="block">
+      <Link href={`/products/${product.slug}`} className="block">
         <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
           <Image
             src={product.image}
@@ -41,7 +41,7 @@ export function ProductCard({ product }: { product: Product }) {
             {product.rating}
           </span>
         </div>
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/products/${product.slug}`}>
           <h3 className="mt-4 line-clamp-2 text-lg font-black tracking-tight text-ink">
             {product.title}
           </h3>

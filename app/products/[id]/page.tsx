@@ -3,15 +3,16 @@ import { notFound } from "next/navigation";
 import { CheckCircle2, ShieldCheck, Star, Truck } from "lucide-react";
 import { AddToCartActions } from "./product-actions";
 import { MotionWrapper } from "@/components/motion-wrapper";
-import { getProductById, products } from "@/lib/products";
+import { fallbackProducts } from "@/lib/products";
+import { getProductBySlug } from "@/lib/supabase/queries";
 import { formatCurrency } from "@/lib/utils";
 
 export function generateStaticParams() {
-  return products.map((product) => ({ id: product.id }));
+  return fallbackProducts.map((product) => ({ id: product.slug }));
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = getProductById(params.id);
+export default async function ProductDetailPage({ params }: { params: { id: string } }) {
+  const product = await getProductBySlug(params.id);
   if (!product) notFound();
 
   return (
