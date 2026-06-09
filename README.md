@@ -1,37 +1,217 @@
 # BookAura
 
-**Live Demo:** https://bookaura-beta.vercel.app/
+**BookAura** is a premium full-stack online storefront for curated books, productivity tools, creative desk products, and everyday lifestyle upgrades.
 
-BookAura is a premium full-stack online storefront for curated books, productivity tools, creative desk products, and everyday upgrades. It is built with Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Lucide React, and Supabase.
+It is built with **Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Lucide React, and Supabase**. The project includes a modern storefront, product browsing, cart system, demo checkout flow, contact form storage, Supabase-backed data, and a protected admin panel.
 
-The project includes a polished storefront, Supabase-powered products, demo checkout orders, contact form storage, and a protected admin panel for managing products, orders, and customer messages.
+---
+
+## Live Demo
+
+**Website:** https://bookaura-beta.vercel.app/
+
+---
+
+## Overview
+
+BookAura is designed as a modern e-commerce-style web application where users can browse products, view product details, add items to cart, and place demo orders.
+
+The project also includes an admin panel where authorized admins can manage products, view orders, and read customer contact messages.
+
+This project was developed as a full-stack learning and portfolio project with a focus on:
+
+* Clean UI/UX
+* Responsive design
+* Reusable components
+* Supabase backend integration
+* Secure admin access
+* Production deployment on Vercel
+
+---
 
 ## Features
 
-- Modern responsive landing page with hero, CTAs, featured products, benefits, testimonials, and newsletter block
-- Product listing page with search, category filters, product cards, pricing, ratings, and quick add-to-cart actions
-- Product detail pages powered by Supabase-first product queries with local fallback data
-- Supabase-ready product backend with local fallback data for development
-- Cart page with localStorage persistence, demo order checkout, quantity controls, totals, remove item, and clear cart actions
-- About page with brand story, mission, and differentiation
-- Contact page with accessible form fields saved to Supabase
-- Protected admin panel for products, orders, and contact messages
-- Mobile navbar, smooth animations, focus states, and optimized Next.js images
+### Storefront
+
+* Modern responsive landing page
+* Hero section with call-to-action buttons
+* Featured products section
+* Product listing page
+* Product search functionality
+* Category-based filtering
+* Product cards with price, rating, badge, and quick actions
+* Product detail pages
+* Cart page with quantity controls
+* Remove item and clear cart options
+* LocalStorage-based cart persistence
+* Demo checkout flow
+* Order saving through Supabase backend
+* About page with brand story and mission
+* Contact page with form submission
+* Smooth animations and transitions
+* Mobile-friendly navbar
+* Clean footer and consistent layout
+
+---
+
+### Backend
+
+* Supabase database integration
+* Supabase-first product fetching
+* Local fallback product data for development
+* API route for contact form submission
+* API route for demo order checkout
+* Orders saved in Supabase
+* Order items saved in Supabase
+* Contact messages saved in Supabase
+
+---
+
+### Admin Panel
+
+* Protected admin login
+* Admin dashboard
+* Product management
+* Add new products
+* Edit existing products
+* Delete products
+* View orders
+* View contact messages
+* Admin access controlled through allowed admin emails
+
+---
 
 ## Tech Stack
 
-- Next.js App Router
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Lucide React
-- Supabase
-- Local fallback data and localStorage cart state
+### Frontend
+
+* Next.js App Router
+* React
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+* Lucide React
+
+### Backend
+
+* Supabase Database
+* Supabase Auth
+* Next.js API Routes
+* Server-side Supabase client
+
+### Deployment
+
+* GitHub
+* Vercel
+
+---
+
+## Project Structure
+
+```txt
+bookaura/
+│
+├── app/
+│   ├── page.tsx
+│   ├── layout.tsx
+│   ├── globals.css
+│   │
+│   ├── products/
+│   │   ├── page.tsx
+│   │   ├── products-client.tsx
+│   │   └── [id]/
+│   │       ├── page.tsx
+│   │       └── product-actions.tsx
+│   │
+│   ├── cart/
+│   │   └── page.tsx
+│   │
+│   ├── about/
+│   │   └── page.tsx
+│   │
+│   ├── contact/
+│   │   └── page.tsx
+│   │
+│   ├── admin/
+│   │   ├── page.tsx
+│   │   ├── login/
+│   │   │   └── page.tsx
+│   │   ├── dashboard/
+│   │   │   └── page.tsx
+│   │   ├── products/
+│   │   │   ├── page.tsx
+│   │   │   ├── new/
+│   │   │   │   └── page.tsx
+│   │   │   └── [id]/
+│   │   │       └── edit/
+│   │   │           └── page.tsx
+│   │   ├── orders/
+│   │   │   └── page.tsx
+│   │   └── messages/
+│   │       └── page.tsx
+│   │
+│   └── api/
+│       ├── contact/
+│       │   └── route.ts
+│       ├── orders/
+│       │   └── route.ts
+│       └── admin/
+│           ├── me/
+│           │   └── route.ts
+│           ├── products/
+│           │   ├── route.ts
+│           │   └── [id]/
+│           │       └── route.ts
+│           ├── orders/
+│           │   └── route.ts
+│           └── messages/
+│               └── route.ts
+│
+├── components/
+│   ├── navbar.tsx
+│   ├── footer.tsx
+│   ├── product-card.tsx
+│   ├── checkout-button.tsx
+│   ├── contact-form.tsx
+│   ├── button.tsx
+│   ├── motion-wrapper.tsx
+│   ├── section-heading.tsx
+│   └── admin/
+│       ├── admin-shell.tsx
+│       ├── admin-stat-card.tsx
+│       └── product-form.tsx
+│
+├── lib/
+│   ├── products.ts
+│   ├── cart-context.tsx
+│   ├── admin-auth.ts
+│   ├── types.ts
+│   ├── utils.ts
+│   └── supabase/
+│       ├── client.ts
+│       ├── server.ts
+│       ├── admin.ts
+│       └── queries.ts
+│
+├── supabase/
+│   ├── schema.sql
+│   └── seed.sql
+│
+├── public/
+├── .env.example
+├── .gitignore
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+├── next.config.mjs
+└── README.md
+```
+
+---
 
 ## Environment Variables
 
-Create `.env.local` from `.env.example`:
+Create a `.env.local` file in the root directory and add the following variables:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
@@ -40,91 +220,284 @@ SUPABASE_SERVICE_ROLE_KEY=
 ADMIN_EMAILS=
 ```
 
-`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are safe for browser use. `SUPABASE_SERVICE_ROLE_KEY` is server-only and must never be exposed in frontend code. `ADMIN_EMAILS` is a comma-separated allowlist for admin access.
+### Variable Details
+
+| Variable                        | Description                                            |
+| ------------------------------- | ------------------------------------------------------ |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL                                   |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase publishable key used by frontend-safe clients |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Supabase secret key used only on the server side       |
+| `ADMIN_EMAILS`                  | Comma-separated list of allowed admin emails           |
+
+Example:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_publishable_key
+SUPABASE_SERVICE_ROLE_KEY=your_secret_key
+ADMIN_EMAILS=admin@example.com
+```
+
+---
+
+## Security Note
+
+Never commit `.env.local`, `.env`, or secret keys to GitHub.
+
+The `SUPABASE_SERVICE_ROLE_KEY` must only be used in server-side files. It should never be exposed in frontend components or browser code.
+
+The `.gitignore` file should include:
+
+```txt
+.env
+.env.local
+.env*.local
+.vercel
+node_modules
+.next
+```
+
+---
 
 ## Supabase Setup
 
-1. Create a Supabase project.
-2. Open the SQL editor.
-3. Run `supabase/schema.sql`.
-4. Run `supabase/seed.sql`.
-5. Create an Auth user for your admin email.
-6. Add that email to `ADMIN_EMAILS` or insert it into `admin_users`.
+### 1. Create a Supabase Project
+
+Go to Supabase and create a new project.
+
+### 2. Run Database Schema
+
+Open the Supabase SQL Editor and run:
+
+```sql
+supabase/schema.sql
+```
+
+This creates the required database tables.
+
+### 3. Insert Seed Data
+
+Run:
+
+```sql
+supabase/seed.sql
+```
+
+This inserts initial product data into the database.
+
+### 4. Create Admin User
+
+Go to Supabase Authentication and create an admin user with email and password.
+
+Make sure the same email is added inside:
+
+```env
+ADMIN_EMAILS=your-admin-email@example.com
+```
+
+Multiple admin emails can be added like this:
+
+```env
+ADMIN_EMAILS=admin1@example.com,admin2@example.com
+```
+
+---
 
 ## Getting Started
 
-Install dependencies:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/shrey123505/bookaura.git
+```
+
+### 2. Go to Project Folder
+
+```bash
+cd bookaura
+```
+
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-Run the development server:
+### 4. Create Environment File
+
+Create a `.env.local` file:
+
+```bash
+cp .env.example .env.local
+```
+
+Then add your Supabase keys and admin email inside `.env.local`.
+
+### 5. Run Development Server
 
 ```bash
 npm run dev
 ```
 
-Open the site:
+Open the project in browser:
 
-```bash
+```txt
 http://localhost:3000
 ```
 
-Run production checks:
+---
+
+## Available Scripts
+
+### Start Development Server
 
 ```bash
-npm run lint
+npm run dev
+```
+
+### Create Production Build
+
+```bash
 npm run build
 ```
 
-## Project Structure
+### Start Production Server Locally
 
-```text
-app/
-  page.tsx
-  products/
-  cart/
-  about/
-  contact/
-  admin/
-  api/
-components/
-  navbar.tsx
-  footer.tsx
-  product-card.tsx
-  admin/
-  button.tsx
-  motion-wrapper.tsx
-lib/
-  products.ts
-  cart-context.tsx
-  supabase/
-  utils.ts
-supabase/
-  schema.sql
-  seed.sql
+```bash
+npm run start
 ```
 
-## Deploying To Vercel
+### Run Lint Check
 
-1. Push this project to a GitHub repository.
-2. Go to Vercel and choose New Project.
-3. Import the GitHub repository.
-4. Keep the framework preset as Next.js.
-5. Use the default build command: `npm run build`.
-6. Use the default output settings.
-7. Click Deploy.
+```bash
+npm run lint
+```
 
-Add the environment variables above in Vercel Project Settings before deploying the Supabase-backed version.
+---
+
+## Deployment on Vercel
+
+### 1. Push Project to GitHub
+
+```bash
+git add .
+git commit -m "Update project"
+git push
+```
+
+### 2. Import Project in Vercel
+
+* Go to Vercel
+* Click on **New Project**
+* Import the GitHub repository
+* Keep framework preset as **Next.js**
+* Keep default build command:
+
+```bash
+npm run build
+```
+
+### 3. Add Environment Variables in Vercel
+
+Go to:
+
+```txt
+Vercel Project Settings → Environment Variables
+```
+
+Add:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY
+ADMIN_EMAILS
+```
+
+### 4. Redeploy
+
+After adding environment variables, redeploy the project from the Vercel dashboard.
+
+---
+
+## Admin Panel
+
+The project includes a protected admin panel.
+
+Admin can:
+
+* View dashboard stats
+* Manage products
+* Add products
+* Edit products
+* Delete products
+* View orders
+* View contact messages
+
+Admin access is controlled using allowed emails from:
+
+```env
+ADMIN_EMAILS
+```
+
+Do not share admin credentials publicly.
+
+---
+
+## Database Tables
+
+The Supabase backend includes tables for:
+
+* Products
+* Orders
+* Order items
+* Contact messages
+* Admin users or admin allowlist logic
+
+---
+
+## Main Pages
+
+| Page            | Route              |
+| --------------- | ------------------ |
+| Home            | `/`                |
+| Products        | `/products`        |
+| Product Details | `/products/[id]`   |
+| Cart            | `/cart`            |
+| About           | `/about`           |
+| Contact         | `/contact`         |
+| Admin Login     | `/admin/login`     |
+| Admin Dashboard | `/admin/dashboard` |
+| Admin Products  | `/admin/products`  |
+| Admin Orders    | `/admin/orders`    |
+| Admin Messages  | `/admin/messages`  |
+
+---
 
 ## Future Improvements
 
-- Add authentication and customer accounts
-- Connect a real product database or CMS
-- Add Stripe or Razorpay checkout
-- Add order confirmation emails
-- Add admin product management
+* Add real payment gateway using Razorpay or Stripe
+* Add customer login and user accounts
+* Add order confirmation emails
+* Add product image upload using Supabase Storage
+* Add wishlist functionality
+* Add product reviews and ratings from users
+* Add inventory management
+* Add coupon and discount system
+* Add advanced admin analytics
+* Add invoice generation
+* Add search engine optimization improvements
 
-## Security Note:
-Never commit `.env.local` or secret keys. `SUPABASE_SERVICE_ROLE_KEY` is server-only and must not be exposed in client components.
+---
+
+## Author
+
+**Shrey Prajapati**
+
+GitHub: https://github.com/shrey123505
+
+---
+
+## License
+
+This project is created for learning, practice, and portfolio purposes.
